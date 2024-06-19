@@ -1,13 +1,26 @@
-= CS87 Course project repo 
+# CS87 Course Project Repository
 
-I've added four subdirectories for you, three are for reports related to your 
-project, and a fourth for project source.  You should not remove these
-four subdirectories, but you should feel free to add additional content 
-to this repo (more directories, etc.) as you find useful for your project.
+This repository contains the code and documentation for the CS87 course project. This project aims to investigate performance improvements on a benchmark computationally-intensive Conway's Game of Life (GOL) using CUDA GPU parallelization and MPI distributed computing. We also briefly investigate a hybrid approach aiming to leverage the increase in computational efficiency possible by using both approaches. See our final report in the FinalReport directory for our literature review, methods, results, and conclusions.  
 
-  * ProjectProposal: your project proposal and annotated bibiligraphy .tex and
-    .bib files 
-  * MidwayReport: your midway report
-  * FinalReport:  your final report
-  * source: your project source code
+## Getting Started
+
+To get started with this project, follow the instructions below.
+
+### Prerequisites
+
+- GPU for CUDA acceleration
+- Multiple host computers for MPI compatability
+
+## Usage
+
+See README file inside source directory.
+
+## Contributors
+
+Dzineon Gyaltsen - dgyalts1@swarthmore.edu
+Hoang Vu - hvu1@swarthmore.edu
+Henry Lei - hlei1@swarthmore.edu
+Sean Cheng - scheng2@swarthmore.edu
+
+
 
