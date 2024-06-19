@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{subfigure,indentfirst}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{CS87 Midway Progress Report: Integrating CUDA and MPI for Conway's Game of Life}
+\author{Hoang "Tommy" Vu, Dzineon Gyaltsen, Sean Cheng, Henry Lei \\
+Computer Science Department, Swarthmore College, Swarthmore, PA  19081}
+\date{\today}
+
+\maketitle
+
+\section{Updated Project Schedule and Responsibilities}
+
+\subsection*{Week 9: Project Initiation} 
+\textit{Completed}
+\begin{itemize}
+    \item Began project setup and resource gathering (\textit{All members})
+    \item Conducted initial literature review on hybrid programming models and performance (\textit{All members})
+    \item Finalized project proposal, focusing on "ghost cell" concept for optimization (\textit{All members})
+\end{itemize}
+
+\subsection*{Week 10: CUDA Implementation of GOL} 
+\textit{Completed}
+\begin{itemize}
+    \item Successfully implemented Conway's Game of Life using CUDA (\textit{All members})
+    \item Resolved segmentation fault error due to improper GPU memory access from CPU (\textit{All members})
+\end{itemize}
+
+\subsection*{Week 11: MPI Development Initiation} 
+\textit{In Progress}
+\begin{itemize}
+    \item Started MPI version development with row/column partitioning (\textit{Dzineon, Tommy})
+    \item Initiated grid partitioning approach for MPI implementation (\textit{Sean, Henry})
+    \item Began baseline testing of CUDA and preliminary MPI versions (\textit{All members})
+\end{itemize}
+
+\subsection*{Week 12: MPI Implementation} 
+\textit{To Start}
+\begin{itemize}
+    \item Finalize MPI implementation focusing on partitioning efficiency (\textit{All members})
+    \item Enhance baseline testing for both CUDA and MPI models (\textit{Sean, Henry})
+    \item Start developing the hybrid CUDA-MPI model (\textit{Tommy, Dzineon})
+\end{itemize}
+
+\subsection*{Week 13: Hybrid Model Development} 
+\textit{To Start}
+\begin{itemize}
+    \item Complete the hybrid model integration (\textit{All members})
+    \item Perform initial performance tests and scalability analysis (\textit{All members})
+    \item Start compiling results for the final presentation (\textit{All members})
+\end{itemize}
+
+\subsection*{Week 14: Performance Analysis and Presentation Preparation} 
+\textit{To Start}
+\begin{itemize}
+    \item Debug and refine the hybrid model, conduct advanced scalability tests (\textit{All members})
+    \item Finalize the presentation content and rehearse (\textit{All members})
+    \item Draft the final project report (\textit{All members})
+    \item Deliver the final presentation (\textit{All members})
+\end{itemize}
+
+\subsection*{Week 15: Final Presentation and Report Submission} 
+\textit{To Start}
+\begin{itemize}
+    \item Compile comprehensive test results (\textit{All members})
+    \item Finalize and submit the detailed project report (\textit{All members})
+\end{itemize}
+
+\section{Difficulties Encountered}
+
+We encountered a significant challenge in the form of a segmentation fault during our CUDA implementation of Conway's Game of Life. This was primarily due to attempts to access GPU memory directly from the CPU, highlighting a typical pitfall in CUDA programming. We overcame this hurdle by employing the \texttt{cudaMemcpy} function for proper data transfer between the CPU and GPU. This experience deepened our understanding of one of CUDA's most fundamental memory management principles.
+
+As we progress with the MPI implementation, we are experimenting with both row/column and grid partitioning methods to optimize efficiency. We foresee potential challenges in fine-tuning inter-node communication and achieving effective load balancing. Our approach to these obstacles involves comprehensive testing and analytical evaluation. In the event of persistent difficulties, we plan to seek additional guidance and consider alternate methodologies.
+
+\end{document}

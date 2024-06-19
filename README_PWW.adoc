@@ -1,0 +1,8 @@
+Group: Hoang "Tommy" Vu, Dzineon Gyaltsen, Sean Cheng, Henry Lei
+
+
+Project Work Week Report
+
+  - Completed most of Game of Life on CUDA, but running into a few errors with some history version running and still working toward full completion of all details.
+  - Code is builable (make success), previous version runnable (not completely correct), current version has a segmentation fault.
+  - To make just copy over the Make File from Forest Fire Simulator (included) and run ./gol -i (#of iteration) -o(oscillator flag/optional) -(1 for true osscailator, 0 for false)

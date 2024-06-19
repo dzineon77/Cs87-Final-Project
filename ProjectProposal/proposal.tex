@@ -1,0 +1,184 @@
+% this is a comment in latex
+% substitute this documentclass definition for uncommented one
+% to switch between single and double column mode
+%\documentclass[11pt,twocolumn]{article}
+\documentclass[11pt]{article}
+
+% use some other pre-defined class definitions for the style of this
+% document.   
+% The .cls and .sty files typically contain comments on how to use them 
+% in your latex document.  For example, if you look at psfig.sty, the 
+% file contains comments that summarize commands implemented by this style 
+% file and how to use them.
+% files are in: /usr/share/texlive/texmf-dist/tex/latex/preprint/
+\usepackage{fullpage}
+\usepackage{subfigure,indentfirst}
+% for url
+\usepackage{hyperref}
+% for underlined text
+\usepackage[normalem]{ulem}
+
+% use some packages for importing figures of different types
+% pdfig is one for importing .pdf files.  sadly, they are not all
+% compatible, so you often have to convert figures to the same type.
+\usepackage{epsfig,graphicx}
+
+
+% you can also define your own formatting directives.  I don't like
+% all the space around the itemize and enumerate directives, so
+% I define my own versions: my_enumerate and my_itemize
+\newenvironment{my_enumerate}{
+  \begin{enumerate}
+    \setlength{\itemsep}{1pt}
+      \setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+\newenvironment{my_itemize}{
+  \begin{itemize}
+    \setlength{\itemsep}{1pt}
+      \setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+% this starts the document
+\begin{document}
+
+% for an article class document, there are some pre-defined types
+% for formatting certain content: title, author, abstract, section
+
+\title{CS87 Project Proposal: Integrating CUDA and MPI for Discrete Event Simulation}
+
+\author{Hoang "Tommy" Vu, Dzineon Gyaltsen, Henry Lei, Sean Cheng \\ 
+Computer Science Department, Swarthmore College, Swarthmore, PA  19081}
+
+\maketitle
+
+\section {Introduction}\label{intro} 
+% A 1-2 paragraph summary of the problem you are solving, why it is interesting, how you are solving it, and what conclusions you expect to draw from your work.
+
+In the field of parallel programming, Open Message Passing Interface (OpenMPI) and Compute Unified Device Architecture (CUDA) are two very prominent platforms that have been developed and applied in a variety of high performance applications. Throughout this course we explored these foundational frameworks in a limited capacity and in isolation -- we never explored how to integrate the two together. While CUDA excels at utilizing the large amount of threads and cores provided by a Graphics Processing Unit (GPU) to execute programs in parallel for improved performance, it lacks scalability as there are limited resources on individual GPUs and individual computing nodes. Conversely, OpenMPI was designed for the purpose of communicating between computing nodes to execute programming in parallel, but lacks the capability of directly utilizing GPUs that are commonly available in the modern computers. Considering the strengths and weaknesses of CUDA and OpenMPI, it is clear that there is an opportunity to combine the two for further improvement in performance.
+
+Given this context, the purpose of this research is to determine the performance capabilities of a hybrid interface utilizing both CUDA and OpenMPI. More specifically, the focus is on evaluating the performance of this hybrid interface for discrete-event simulation. For our final project, the discrete-event simulator we chose is the foundational Conway's Game of Life (GOL) due to its natural compatibility for parallel execution. Our primary task is to implement GOL on three different parallel programming interfaces: CUDA, OpenMPI, and the hybrid CUDA/OpenMPI. Next, we will compare the runtime performance of each implementation and evaluate the differences between them. We expect that as the size of the GOL board significantly increases, there will be an apparent difference in performance from the CUDA and OpenMPI hybrid model compared to the remaining two approaches. We also expect that the CUDA and MPI hybrid model would perform the best in a scalability analysis. 
+
+
+\section {Related Work}\label{rel}
+% 1-2 paragraphs describing similar approaches to the one you propose. This need
+% not be an exhaustive summary of related literature, but should be used to put
+% your solution in context and/or to support your solution. This is also a good
+% way to motivate your work. This can be a summary taken from your longer
+% annotated bibliography.  
+
+% Here is an example of how to cite someting from the bib 
+% file~\cite{newhall:nswap2L}.  Here is another~\cite{unixV}.  
+% The proposal.bib file has some example 
+% bibtex entries you can use as a guide for entering your own.
+
+% In the Annotated Bibliography~\ref{annon} you will included an expanded description of your related work (and you should cite there as well.
+
+Recent studies have shown the power of combining CUDA and MPI to improve Parallel Discrete Event Simulation (PDES). Research focusing on multi-core systems suggest that using a mix of locking methods can lead to better performance compared to traditional MPI-only approaches \cite{Wang:PDES}. This is mainly because it reduces the need for repetitive message copying and synchronization, which slows down execution. The benefits of this combination are also clear in work that applied CUDA and MPI together to speed up complex matrix calculations, indicating that this blend could be a strong way to make computations faster and more efficient.
+
+Improvements in how CUDA allows GPUs to communicate have opened doors for faster and more direct data transfer, which is highly relevant for combining CUDA with MPI to make simulations more efficient. This is supported by studies where CUDA and OpenMPI are integrated together to solve application-level problems. One such application is optimizing calculations for fluid dynamics to make them much faster, with results showing an 80 percent increase in efficiency \cite{Delmas:WaterFlow}. Another example application is particle-based discrete simulation for multiphase flow and phase-change heat transfer; a CUDA-MPI hybrid model using inter-process communication (CUDA IPC) showed a 16 percent improvement in runtime and 79 percent improvement in communication latency between GPUs \cite{Potluri:CUDAIPC}. Such findings support the idea that a hybrid CUDA-MPI model could lead to significant gains in the performance of large-scale simulations. This research lays the groundwork for our project, suggesting that merging CUDA with MPI might be the solution for enhancing the speed and scalability of discrete-event simulations.
+
+\section {Our Solution}\label{soln}
+% 3-4 paragraphs describing what you plan to do, how you plan to do it, how it
+% solves the problem, and what types of conclusions you expect to draw from your
+% work.
+Our project proposes to construct and evaluate a hybrid parallel programming model that integrates the strengths of CUDA for GPU-level computation with the strengths of MPI for inter-node communication, specifically applied to the domain of discrete-event simulation (DES). By leveraging the CUDA architecture, we plan to exploit the massive parallelism offered by GPUs to accelerate the computational aspects of the Conway’s Game of Life (GOL) simulation. Simultaneously, MPI will be utilized to orchestrate a distributed computing environment, enabling the simulation to scale across multiple nodes and, thereby, harnessing additional computational resources. This approach aims to address the limitations of single-interface models, which either do not scale (in the case of CUDA) or do not fully exploit available GPU resources (as with MPI).
+
+Our final project will involve three distinct phases: first, we will adapt GOL to a CUDA-based environment, optimizing it to utilize the multithreading capabilities of a single GPU. Next, we will develop an MPI-based version of GOL that distributes the workload across multiple computing nodes without GPU acceleration. Finally, we will create a hybrid CUDA-MPI version, where the computation within each node is GPU-accelerated, and the nodes communicate with each other using MPI. This version is expected to combine the benefits of both platforms: the high-speed computation of GPUs and the scalable distribution of MPI.
+
+By conducting a comparative analysis of execution times, scalability, and resource utilization across these three implementations, we anticipate that the hybrid model will demonstrate superior performance, especially as the complexity and size of the simulation increase. We expect to encounter challenges related to data synchronization and communication overhead, which will be critical points of investigation. In resolving these, we aim to contribute practical insights into the optimization of hybrid parallel programming models for DES. The culmination of our work will be a set of conclusions regarding the viability and efficiency of hybrid CUDA-MPI models in large-scale simulations. We anticipate that our findings will not only validate the theoretical advantages of hybrid models but also serve as a benchmark for future research and applications in this area. 
+
+\section {Experiments}\label{exper}
+% 1-3 paragraphs describing how you plan to evaluate your work. List the
+% experiments you will perform. For each experiment, explain how you will perform
+% it and what the results will show (explain why you are performing a particular
+% test).
+
+To evaluate the performance improvements resulting from the integration of MPI and CUDA in optimizing a Game of Life simulation, we will conduct a series of experiments to measure various aspects of the program's performance. The Game of Life simulation involves a grid of cells evolving over time based on certain rules, making it a suitable candidate for parallel processing with MPI and CUDA.
+
+We will start by running the original sequential implementation of the Game of Life simulation to establish a baseline. This experiment will demonstrate the execution time and resource utilization of the sequential version.
+
+In our first experiment, we will implement a parallel version of the Game of Life using MPI to distribute the grid across multiple processes. We will measure the execution time and scalability by varying the number of processes. The results will show how well MPI parallelization can improve performance compared to the sequential version.
+
+In our second experiment, we will create a CUDA-accelerated version of the simulation by offloading the computation to the GPU. We will measure the execution time and resource usage, comparing it to both the sequential and MPI versions. This will demonstrate the performance benefits achieved through GPU acceleration.
+
+In our third experiment to showcase the combined benefits of MPI and CUDA, we will integrate both parallelization techniques. This experiment will explore how well the MPI processes and CUDA threads work together to optimize the Game of Life simulation. We will measure execution time, scalability, and resource utilization.
+
+Lastly, we will conduct scalability tests by increasing the problem size and the number of MPI processes and CUDA threads. This experiment will reveal how well our solution scales with larger input sizes, and it will help identify any potential bottlenecks.
+
+By performing these experiments, we aim to demonstrate the benefits of integrating MPI and CUDA for optimizing the Game of Life simulation. We expect to show significant improvements in execution time and scalability, highlighting how parallel processing and GPU acceleration can enhance the performance of computationally intensive applications. These experiments will provide valuable insights into the effectiveness of our approach and help in fine-tuning the system for optimal performance.
+
+\section {Equipment Needed}\label{equip}
+% 1 paragraph listing any software tools that you will need to implement and/or
+% test your work. If you need to have software installed to implement your
+% project, you should check with the systems lab to see if it is something that
+% can be installed on the CS lab machines.
+
+The usage of OpenMPI to spread the program workload throughout multiple computing nodes means that it is necessary to have access to multiple computers that are capable of being hosts for the OpenMPI interface. Additionally, since CUDA is used to execute the program on each computing node, it is very important that the computers acting as OpenMPI hosts are equipped with dedicated NVIDIA GPUs. It is preferred to have all the OpenMPI host computers free of any extra running applications, but this is likely to have marginal improvement on result accuracy so it is not required. Lastly, to simplify the process of combining CUDA and OpenMPI, it is preferred to have access to the CUDA-Aware OpenMPI version as it minimize the intermediate steps of transferring data from the CPU and GPU.
+
+\section {Schedule}\label{sched}
+% list the specific steps that you will take to complete your project, include
+% dates and milestones. This is particularly important to help keep you on track,
+% and to ensure that if you run into difficulties completing your entire project,
+% you have at least implemented steps along the way. Also, this is a great way to
+% get specific feedback from me about what you plan to do and how you plan to do
+% it.  
+
+% here is an example of a numbered list 
+\begin{my_enumerate}
+  \item Week 9, Nov. 6: Finalizing the proposal and gather necessary initiating resources
+  \item Week 10, Nov. 13: Implementing the parallel Conway's Game of Life with CUDA on a singe computer
+  \item Week 11, Nov. 20: Implementing the parallel Conway's Game of Life with OpenMPI on multiple host computers
+  \item Week 12, Nov. 27: Implementing the parallel Conway's Game of Life with a combination of CUDA and OpenMPI on multiple host computers
+  \item Week 13, Dec. 04: Collect results for the performance of different Conway's Game of Life on the three different interfaces and prepare the presentation.
+  \item Week 14, Dec. 11 (pres): Present the research and prepare the written report
+  \item Week 15, Dec. 18 (report): Finalize the written report and the documentation of the code
+\end{my_enumerate} 
+
+\section {Conclusions}\label{sched}
+% 1 paragraph summary of what you are doing, why, how, and what
+% you hope to demonstrate through your work.
+
+% The References section is auto generated by specifying the .bib file
+% containing bibtex entries, and the style I want to use (plain)
+% compiling with latex, bibtex, latex, latex, will populate this
+% section with all references from the .bib file that I cite in this paper
+% and will set the citations in the prose to the numbered entry here
+In this research, we are pioneering a hybrid parallel programming approach by integrating CUDA and MPI to enhance the efficiency and scalability of discrete-event simulations, specifically through the application of Conway's Game of Life. Our goal is to demonstrate that this hybrid model can significantly outperform the traditional single-interface methods, by tapping into the high-throughput computation offered by GPUs and the robust data distribution facilitated by MPI across multiple nodes. By implementing and benchmarking the Game of Life simulation across pure CUDA, pure MPI, and the combined CUDA-MPI interfaces, we aim to provide concrete evidence of the advantages in execution speed and scalability that the hybrid model presents. The results are expected to offer valuable insights into optimizing parallel computing frameworks and serve as a guiding benchmark for future endeavors in the realm of high-performance computing simulations.
+\bibliography{proposal}
+\bibliographystyle{plain}
+
+\newpage 
+
+% I want the Annotated Bib to be single column pages
+\onecolumn
+\section*{Annotated Bibliography}\label{annon} 
+
+\vspace{1em}
+
+\noindent \textbf{Paper \#1 - Parallel Discrete Event Simulation for Multi-Core Systems: Analysis and Optimization}
+
+This paper presents a study on the benefits of using a thread-based version of a Parallel Discrete Event Simulation (PDES) simulator on various multi-core platforms. The authors analyze the performance of the simulator and propose optimizations on a real model of a Personal Communication System, including exploring the design space of the locking mechanism around the critical event queue and identifying and solving a significant memory leak problem. Specifically, they develop several new organizations that differ in the locking primitives and lock distribution. They find that a hybrid locking mechanism that combines reader-writer locks and spin locks can provide the best performance and scalability. 
+
+In the context of our project, this paper relates to how we are thinking about using MPI to parallelize our Game of Life lab and what are some of the performance-related constraints we should expect. In this paper, the authors compare the performance of their thread-based implementation with an MPI-based version of the simulator. They find that the multi-threaded implementation outperforms the MPI-based version, with the message rate of the multi-threaded version exceeding that of the MPI-based version by a factor of 3.4 on the Core i7 and 1.8 on the Magny-Cours machine. The authors attribute this performance improvement to the elimination of two memory copying operations that are performed through shared memory for each message in the MPI-based communication, incurring significant overhead. On the other hand, these operations are eliminated in the multi-threaded implementation. Therefore, the paper proposes a thread-based implementation as an alternative to the traditional MPI-based approach for PDES simulation kernels. The authors show that the multi-threaded implementation can significantly improve the performance and scalability of the simulator on multi-core systems, by eliminating multiple message copying and minimizing synchronization delays. Thus, if we use MPI in our project we should consider how the MPI message copying and synchronization will affect our performance.
+
+\vspace{1em}
+
+\noindent \textbf{Paper \#2 - Optimizing MPI Communication on Multi-GPU Systems using CUDA Inter-Process Communication}
+
+This paper from 2012 proposes optimizations for MPI communication between GPUs within a node of a GPU cluster, using CUDA inter-process communication (IPC). CUDA IPC was a feature that was introduced with the release of CUDA 4.1 which allows direct GPU-to-GPU communication between processes without staging through host memory. IPC allows a process to efficiently share its GPU device buffer to a remote process via device handles, from which the remote process will be able to map the buffer to its own address space and use the data inside. The authors found that leveraging IPC generated significantly lower latency for both two-sided and one-sided communication models than existing MPI implementations, along with improvements in other benchmarks. The authors also tested the performance of IPC at the application level, and found improvements in latency performance there as well. 
+
+For the purposes of our project, this paper is relevant in that it provides an in-depth examination of a tool (CUDA IPC) that may be useful for improving the performance of our discrete event simulation. Managing to integrate the distributed-memory benefits of advanced MPI libraries with the GPU-optimized benefits of CUDA is the primary challenge presented in our project, and this paper offers some design implementations to address this. While this paper is not relevant for parallel discrete event simulation (PDES) applications in particular, it is still valuable to learn the available tools and libraries that could be of use when applied to PDES. 
+
+\vspace{1em}
+
+\noindent \textbf{Paper \#3 - Multi-GPU implementation of a time-explicit finite volume solver using CUDA and a CUDA-Aware version of OpenMPI with application to shallow water flows}
+
+This paper describes the development of an approach to a time-explicit finite volume solver for the Shallow-Water Equations (SWE) using a multiple GPUs architecture. More specifically, the highlighted methodology is a combination of OpenMPI and CUDA-Fortran, which allows the usage of as many GPUs as necessary. Additionally, the domain decomposition on the 2D unstructured triangular meshes for the SWE is handled by the METIS library. To simplify the process of combining OpenMPI and CUDA, this research leveraged a CUDA-Aware version of OpenMPI. This adaptation allows the hosts of OpenMPI to exchange messages and data that can be directly used for CUDA instead of the traditional extra step of using the CPU as an intermediate messenger. The motivation for this development is the need for an interface that can handle the combination of rapidly increasing demand for both computational efficiency and the size of the problem. Consequently, a hybrid approach of CUDA and OpenMPI is proposed as a solution due to GPUs capabilities to handle large computational tasks combined with OpenMPI capabilities of expanding the available computational power through communication between computing nodes.
+
+This new parallel computing interface proves to be very effective in handling a particular immense computational complexity of the SWE meshes. When using CUDA and OpenMPI to employ 24 to 28 GPUs to handle the meshes calculations, there is at least 80 percent increase in efficiency. Furthermore, comparing the multi-GPU approach to the traditional OpenMPI multi-CPU approach for this particular test case, there needs to be about 100 CPU cores to achieve the same performance as one GPU. Comparatively, discrete-event simulators are much less complex computational tasks compared to the SWE objective of this paper. Therefore, the results of this development present great support for our approach of combining CUDA with OpenMPI to develop a methodology for improving parallel discrete-event simulator performance.  Furthermore, this research brought to our attention the availability of CUDA-Aware OpenMPI, which can potentially lead to a much simpler programming process for a hybrid model of CUDA and OpenMPI. In conclusion, this paper provided crucial insights into a previous work involving the improvement in parallel programming performance with the hybrid model of CUDA and OpenMPI.
+
+
+\end{document}

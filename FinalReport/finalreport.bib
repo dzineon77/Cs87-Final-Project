@@ -1,0 +1,54 @@
+% this is an example bibtex file, there are different types of entries
+% each with different format requirements
+% the most commonly used are book, inproceedings, article, and misc 
+% annotate is used to add comments about the work to the .bib file
+% entries (its contents will not show up in the References section) 
+% see http://www.bibtex.org/ for lots more information
+
+
+% not every field of each style of entry is required, but author, title,
+% year, and some specification of how it is published is required for
+% most formats  (I could remove month here, for example)
+% anything I put in { } will be translated as is (this is how I can
+% force capitaliziation), anything in "" will be capitalize based on
+% the whim of bibtex
+@ARTICLE{Wang:PDES,
+  author={Wang, Jingjing and Jagtap, Deepak and Abu-Ghazaleh, Nael and Ponomarev, Dmitry},
+  journal={IEEE Transactions on Parallel and Distributed Systems}, 
+  title={Parallel Discrete Event Simulation for Multi-Core Systems: Analysis and Optimization}, 
+  year={2014},
+  volume={25},
+  number={6},
+  pages={1574-1584},
+  doi={10.1109/TPDS.2013.193}
+}
+
+@article{Delmas:WaterFlow,
+title = {Multi-GPU implementation of a time-explicit finite volume solver using CUDA and a CUDA-Aware version of OpenMPI with application to shallow water flows},
+journal = {Computer Physics Communications},
+volume = {271},
+pages = {108190},
+year = {2022},
+issn = {0010-4655},
+doi = {https://doi.org/10.1016/j.cpc.2021.108190},
+url = {https://www.sciencedirect.com/science/article/pii/S0010465521003027},
+author = {Vincent Delmas and Azzedine Soulaïmani},
+keywords = {Flood simulations, Shallow-water equations, Multi-GPU, CUDA, MPI, HPC},
+abstract = {This paper shows the development of a multi-GPU version of a time-explicit finite volume solver for the Shallow-Water Equations (SWE) on a multi-GPU architecture. MPI is combined with CUDA-Fortran in order to use as many GPUs as needed and the METIS library is leveraged to perform a domain decomposition on the 2D unstructured triangular meshes of interest. A CUDA-Aware version of OpenMPI is adopted to speed up the messages between the MPI processes. A study of both speed-up and efficiency is conducted; first, for a classic dam-break flow in a canal, and then for two real domains with complex bathymetries. In both cases, meshes with up to 12 million cells are used. Using 24 to 28 GPUs on these meshes leads to an efficiency of 80% and more. Finally, the multi-GPU version is compared to the pure MPI multi-CPU version, and it is concluded that in this particular case, about 100 CPU cores would be needed to achieve the same performance as one GPU. The developed methodology is applicable for general time-explicit Riemann solvers for conservation laws.}
+}
+
+@INPROCEEDINGS{Potluri:CUDAIPC,
+  author={Potluri, S. and Wang, H. and Bureddy, D. and Singh, A.K. and Rosales, C. and Panda, Dhabaleswar K.},
+  booktitle={2012 IEEE 26th International Parallel and Distributed Processing Symposium Workshops & PhD Forum}, 
+  title={Optimizing MPI Communication on Multi-GPU Systems Using CUDA Inter-Process Communication}, 
+  year={2012},
+  volume={},
+  number={},
+  pages={1848-1857},
+  doi={10.1109/IPDPSW.2012.228}
+}
+
+
+
+
+

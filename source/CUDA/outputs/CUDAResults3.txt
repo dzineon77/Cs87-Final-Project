@@ -1,0 +1,158 @@
+ 
+#################
+N: 33000, I: 3
+
+real	0m13.152s
+user	0m10.898s
+sys	0m2.232s
+ 
+#################
+N: 41000, I: 3
+
+real	0m22.584s
+user	0m19.405s
+sys	0m3.152s
+ 
+#################
+N: 49000, I: 3
+./runCUDA.sh: line 43: 1298321 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.067s
+user	0m0.001s
+sys	0m0.000s
+ 
+#################
+N: 57000, I: 3
+./runCUDA.sh: line 43: 1298325 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.069s
+user	0m0.001s
+sys	0m0.000s
+ 
+#################
+N: 65000, I: 3
+./runCUDA.sh: line 43: 1298328 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.097s
+user	0m0.000s
+sys	0m0.002s
+
+######################################################################################################
+######################################################################################################
+ 
+#################
+N: 41000, I: 3
+
+real	0m22.562s
+user	0m19.177s
+sys	0m3.365s
+ 
+#################
+N: 42000, I: 3
+
+real	0m25.128s
+user	0m21.148s
+sys	0m3.796s
+ 
+#################
+N: 43000, I: 3
+
+real	0m27.497s
+user	0m23.533s
+sys	0m3.936s
+ 
+#################
+N: 44000, I: 3
+
+real	0m35.907s
+user	0m31.439s
+sys	0m4.445s
+ 
+#################
+N: 45000, I: 3
+
+real	0m30.750s
+user	0m26.587s
+sys	0m4.140s
+ 
+#################
+N: 46000, I: 3
+malloc temp_board_GPU failed
+
+real	0m33.781s
+user	0m29.325s
+sys	0m4.425s
+ 
+#################
+N: 47000, I: 3
+./runCUDA.sh: line 51: 1298734 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.060s
+user	0m0.001s
+sys	0m0.000s
+ 
+#################
+N: 48000, I: 3
+./runCUDA.sh: line 51: 1298737 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.057s
+user	0m0.001s
+sys	0m0.000s
+ 
+#################
+N: 49000, I: 3
+./runCUDA.sh: line 51: 1298740 Segmentation fault      (core dumped) ./gol -i 3 -n $n -m $n -o 1
+
+real	0m0.061s
+user	0m0.001s
+sys	0m0.000s
+
+######################################################################################################
+######################################################################################################
+ 
+#################
+N: 45000, I: 3
+
+real	0m30.999s
+user	0m26.660s
+sys	0m4.311s
+ 
+#################
+N: 45200, I: 3
+malloc temp_board_GPU failed
+
+real	0m30.514s
+user	0m26.322s
+sys	0m4.160s
+ 
+#################
+N: 45400, I: 3
+malloc temp_board_GPU failed
+
+real	0m30.647s
+user	0m26.404s
+sys	0m4.015s
+ 
+#################
+N: 45600, I: 3
+malloc temp_board_GPU failed
+
+real	0m39.618s
+user	0m34.992s
+sys	0m4.596s
+ 
+#################
+N: 45800, I: 3
+malloc temp_board_GPU failed
+
+real	0m30.951s
+user	0m26.531s
+sys	0m4.396s
+ 
+#################
+N: 46000, I: 3
+malloc temp_board_GPU failed
+
+real	0m33.626s
+user	0m29.222s
+sys	0m4.375s

@@ -1,0 +1,29 @@
+This is the top-level directory for our project source code
+
+For running CUDA:
+##################################
+
+Navigate to Rectangle subdirectory, and run make. golDEMOcopy.cu is not linked to the Makefile and will not 
+be impacted. To run from terminal, run: 
+./gol -n (board width) -m (board height) -i (iterations) -o (oscillator flag)
+
+To recreate results as seen in the outputs folder, uncomment each test experiment individually and run 
+bash script ./runCUDA.sh. To experiment with optimizer flag, comment/uncomment the CFLAGS -O2 ... 
+line and re-run make.
+
+For running MPI:
+##################################
+
+Simply run make. To run from terminal, use ssh-agent bash and ssh-add to enable MPI mpirun. Then, run: 
+mpirun -n (# hosts) -hostfile (hostfile) ./golMPI -n (nxn board dimensions) -i (iterations) -o (oscillator flag)
+
+To recreate results as seen in the outputs folder, uncomment each test experiment individually 
+and run bash script ./golMPI-test.sh. 
+
+For running MPI-CUDA:
+##################################
+
+Simply run make. To run from terminal, follow same process as MPI via ssh-add and run:
+mpirun -n (# hosts) -hostfile (hostfile) ./golMPI-CUDA -n (board width) -m (board height) -i (iterations) -o (oscillator flag)
+
+Run bash script ./golMPI-CUDA-test.sh to recreate results

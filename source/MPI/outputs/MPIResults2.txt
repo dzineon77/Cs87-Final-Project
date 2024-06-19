@@ -1,0 +1,53 @@
+using hostfile hostfilehuge
+ 
+#################
+N: 65536, P: 32, I: 3
+
+real	0m6.481s
+user	0m5.033s
+sys	0m0.532s
+ 
+#################
+N: 131072, P: 32, I: 3
+
+real	0m18.375s
+user	0m16.313s
+sys	0m1.078s
+ 
+#################
+N: 262144, P: 32, I: 3
+
+real	1m10.115s
+user	1m5.086s
+sys	0m3.887s
+ 
+#################
+N: 524288, P: 32, I: 3
+[pigeon:3711801] *** Process received signal ***
+[pigeon:3711801] Signal: Segmentation fault (11)
+[pigeon:3711801] Signal code: Address not mapped (1)
+[pigeon:3711801] Failing at address: 0x7fd5673fe010
+[pigeon:3711801] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x42520)[0x7fe77fa1a520]
+[pigeon:3711801] [ 1] ../MPI/golMPI(+0x164f)[0x55719113164f]
+[pigeon:3711801] [ 2] ../MPI/golMPI(+0x174e)[0x55719113174e]
+[pigeon:3711801] [ 3] ../MPI/golMPI(+0x1436)[0x557191131436]
+[pigeon:3711801] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7fe77fa01d90]
+[pigeon:3711801] [ 5] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7fe77fa01e40]
+[pigeon:3711801] [ 6] ../MPI/golMPI(+0x1515)[0x557191131515]
+[pigeon:3711801] *** End of error message ***
+
+
+...
+...
+...
+
+
+
+[egg:4099368] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 3711801 on node pigeon exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+real	2m19.154s
+user	1m51.564s
+sys	0m19.612s
